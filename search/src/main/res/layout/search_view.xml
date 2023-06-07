@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/searchLayout"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  android:visibility="gone">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="UselessParent">
+
+    <LinearLayout
+      android:id="@+id/searchBar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/colorSurface"
+      android:gravity="start|center"
+      android:orientation="horizontal">
+
+      <ImageButton
+        android:id="@+id/searchBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:paddingStart="@dimen/search_icon_padding"
+        android:paddingEnd="@dimen/search_icon_padding"
+        app:srcCompat="@drawable/icon_back_light"
+        tools:ignore="ContentDescription" />
+
+      <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/searchInput"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:layout_weight="1"
+        android:background="@null"
+        android:hint="@string/search_hint"
+        android:imeOptions="actionSearch|flagNoExtractUi"
+        android:inputType="textAutoComplete|text"
+        android:maxLines="1"
+        android:paddingStart="@dimen/search_view_text_padding"
+        android:paddingEnd="@dimen/search_view_text_padding"
+        android:textAlignment="viewStart"
+        android:textColor="@color/search_text_primary"
+        android:textColorLink="@color/search_bg"
+        android:textCursorDrawable="@null" />
+
+      <ImageButton
+        android:id="@+id/searchVoice"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@string/search_voice"
+        android:paddingStart="@dimen/search_icon_padding"
+        android:paddingEnd="@dimen/search_icon_padding"
+        app:srcCompat="@drawable/icon_microphone" />
+
+      <ImageButton
+        android:id="@+id/searchClear"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@string/search_clear"
+        android:paddingStart="@dimen/search_icon_padding"
+        android:paddingEnd="@dimen/search_icon_padding"
+        android:visibility="gone"
+        app:srcCompat="@drawable/icon_close_search" />
+    </LinearLayout>
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/search_bg" />
+
+  </LinearLayout>
+
+</FrameLayout>
