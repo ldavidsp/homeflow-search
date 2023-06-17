@@ -9,7 +9,7 @@ Homeflow Search View Android Kotlin
 
 ## Installation
 
-**Step 1.** Add the [JitPack](https://jitpack.io/#ldavidsp/homeflow-search/1.0.1) repository to your build file. Add it in your root `/build.gradle` at the end of repositories:
+**Step 1.** Add the [JitPack](https://jitpack.io/#ldavidsp/homeflow-search/1.0.2) repository to your build file. Add it in your root `/build.gradle` at the end of repositories:
 
 ```gradle
 allprojects {
@@ -36,7 +36,7 @@ dependencyResolutionManagement {
 ```gradle
 dependencies {
     ...
-    implementation 'com.github.ldavidsp:homeflow-search:v2.0.4'
+    implementation 'com.github.ldavidsp:homeflow-search:1.0.2'
 }
 ```
 
@@ -44,7 +44,45 @@ dependencies {
 To open the search view on your app, add the following code to the end of your layout:
 ```xml
 <com.homeflow.search.HomeflowSearchView
-    android:id="@+id/search_view"
+    android:id="@+id/searchView"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />
+```
+
+```kotlin
+binding.searchView?.setOnQueryTextListener(object : OnSearchQueryTextListener {
+    override fun onQueryTextChange(newText: String): Boolean {
+        return false
+    }
+})
+
+private fun closeSearchView(searchView: HomeflowSearchView?) {
+    searchView?.closeSearch()
+    searchView?.setSearchViewListener(object : OnSearchViewListener {
+      override fun onSearchViewOpened() {
+        // code
+      }
+
+      override fun onSearchViewClosed() {
+        // code
+      }
+    })
+ }
+ 
+ 
+ searchView?.setVoiceResultIntent(getVoiceResult)
+ 
+ private val getVoiceResult =
+    registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+      if (it.resultCode == Activity.RESULT_OK) {
+        val matches = it.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+        if (matches != null && matches.size > 0) {
+          val search = matches[0]
+          if (search.isNotBlank()) {
+            searchView?.setQuery(search)
+          }
+        }
+      }
+ }
+          
 ```
