@@ -24,6 +24,7 @@ import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import com.homeflow.search.core.AnimationUtils.circleHideView
 import com.homeflow.search.core.AnimationUtils.circleRevealView
 import com.homeflow.search.core.interfaces.OnSearchClearTextClickListener
@@ -345,10 +346,10 @@ class HomeflowSearchView @JvmOverloads constructor(private val mContext: Context
     mSearchEditText.setText(EMPTY_STRING)
     mSearchEditText.requestFocus()
     if (mShouldAnimate) {
-      mRoot.visibility = VISIBLE
+      mRoot.isVisible = true
       circleRevealView(mSearchBar)
     } else {
-      mRoot.visibility = VISIBLE
+      mRoot.isVisible = true
     }
 
     mSearchViewListener?.onSearchViewOpened()
@@ -380,13 +381,13 @@ class HomeflowSearchView @JvmOverloads constructor(private val mContext: Context
       val listenerAdapter: AnimatorListenerAdapter = object : AnimatorListenerAdapter() {
         override fun onAnimationEnd(animation: Animator) {
           super.onAnimationEnd(animation)
-          v.visibility = GONE
+          v.isVisible = false
         }
       }
 
       circleHideView(mSearchBar, listenerAdapter)
     } else {
-      mRoot.visibility = GONE
+      mRoot.isVisible = false
     }
 
     mSearchViewListener?.onSearchViewClosed()
